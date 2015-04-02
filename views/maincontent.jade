@@ -1,0 +1,233 @@
+extends layout
+
+block maincontent
+		#pcont.container-fluid
+				.cl-mcont
+					.stats_bar
+						.butpro.butstyle.flat
+							.sub
+								h2 CLIENTS
+								span#total_clientes 170
+							.stat
+								span.spk1
+									canvas(style='display: inline-block; width: 74px; height: 16px; vertical-align: top;', width='74', height='16')
+						.butpro.butstyle.flat
+							.sub
+								h2 Sales
+								span $951,611
+							.stat
+								span.up  13,5%
+						.butpro.butstyle.flat
+							.sub
+								h2 VISITS
+								span 125
+							.stat
+								span.down  20,7%
+						.butpro.butstyle.flat
+							.sub
+								h2 NEW USERS
+								span 18
+							.stat
+								span.equal  0%
+						.butpro.butstyle.flat
+							.sub
+								h2 AVERAGE
+								span 3%
+							.stat
+								span.spk2
+						.butpro.butstyle.flat
+							.sub
+								h2 Downloads
+								span 184
+							.stat
+								span.spk3
+					.row.dash-cols
+						.col-sm-6.col-md-6
+							ul.timeline
+								li
+									i.fa.fa-comment
+									span.date 5 Jan
+									.content
+										p
+											strong John
+											|  has called Shenlong with 
+											strong You
+											| .
+										small A minute ago
+								li
+									i.fa.fa-envelope.green
+									span.date 5 Jan
+									.content
+										i.fa.fa-paperclip.pull-right
+										p
+											strong Bob
+											br
+											| This is a message for you in your birthday.
+										a.image-zoom(href='cz/images/gallery/img4.jpg')
+											img.img-thumbnail(src='cz/images/gallery/img4.jpg', style='height:64px;')
+										a.image-zoom(href='cz/images/gallery/img6.jpg')
+											img.img-thumbnail(src='cz/images/gallery/img6.jpg', style='height:64px;')
+								li
+									i.fa.fa-file.red
+									span.date 5 Jan
+									.content
+										p
+											strong Michael
+											|  has wrote on your wall:
+										blockquote
+											p
+												| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+											small Some historic guy
+								li
+									i.fa.fa-globe.purple
+									span.date 5 Jan
+									.content
+										p
+											strong María
+											|  This is a message for you in your birthday.
+							.block-flat
+								.header
+									h3 Latest Tickets
+								.content
+									.list-group.tickets
+										li.list-group-item(href='#')
+											span.label.label-primary.pull-right Normal
+											img.avatar(src='cz/images/avatar_50.jpg')
+											h4.name Jeff Hanneman
+											p My vMaps plugin doesn't work
+											span.date 17 Feb
+										li.list-group-item(href='#')
+											span.label.label-danger.pull-right Urgent
+											img.avatar(src='cz/images/avatar4_50.jpg')
+											h4.name Jhon Doe
+											p My vMaps plugin doesn't work
+											span.date 15 Feb
+										li.list-group-item(href='#')
+											span.label.label-warning.pull-right Medium
+											img.avatar(src='cz/images/avatar1_50.jpg')
+											h4.name Victor Jara
+											p My vMaps plugin doesn't work
+											span.date 15 Feb
+									.text-center
+										button.btn.btn-success.btn-flat.btn-rad.md-trigger(data-modal='reply-ticket') Reply Last
+									// Nifty Modal
+									#reply-ticket.md-modal.colored-header.custom-width.md-effect-9
+										.md-content
+											.modal-header
+												h3 Reply Ticket
+												button.close.md-close(type='button', data-dismiss='modal', aria-hidden='true') ×
+											.modal-body.form
+												.list-group.tickets
+													li.list-group-item(href='#')
+														span.label.label-primary.pull-right Normal
+														img.avatar(src='cz/images/avatar_50.jpg')
+														h4.name Jeff Hanneman
+														p My vMaps plugin doesn't work
+														span.date 17 Feb
+												.form-group.flat-editor
+													#summernote
+												p.spacer2
+													input(type='checkbox', name='c[]', checked='')
+													|   Notify me if this ticket receives any comment.
+											.modal-footer
+												button.btn.btn-default.btn-flat.md-close(type='button', data-dismiss='modal') Cancel
+												button.btn.btn-primary.btn-flat.md-close(type='button', data-dismiss='modal') Reply
+									.md-overlay
+							.block-flat
+								.content.no-padding
+									span.pull-right February 15 - 30
+									h4.title Tickets Summary
+									.list-group.tickets
+										li.list-group-item(href='#')
+											| Unread 
+											span.badge.badge-primary 20
+										li.list-group-item(href='#')
+											| Open Tickets 
+											span.badge.badge-success 35
+										li.list-group-item(href='#')
+											| Closed Tickets 
+											span.badge 45
+						.col-sm-6.col-md-6
+							.block-flat.pie-widget
+								.content.no-padding
+									h4.no-margin Top 10 Products
+									.row
+										.col-sm-4
+											#ticket-chart(style='height:160px;')
+										.col-sm-8
+											table.no-borders.no-strip.padding-sm
+												tbody.no-border-x.no-border-y
+													tr
+														td(style='width:15px;')
+															.legend(data-color='#649BF4')
+														td Responsive
+														td.text-right
+															b $3.500
+													tr
+														td
+															.legend(data-color='#19B698')
+														td Corporate Site
+														td.text-right
+															b $3.500
+													tr
+														td
+															.legend(data-color='#BD3B47')
+														td Creative Portfolio
+														td.text-right
+															b $3.500
+													tr
+														td
+															.legend(data-color='#DD4444')
+														td Wordpress Theme
+														td.text-right
+															b $3.500
+													tr
+														td
+															.legend(data-color='#FD9C35')
+														td Photography Template
+														td.text-right
+															b $3.500
+									.row.stats
+										.col-sm-6
+											.spk4.pull-right
+											p New Visitors
+											h5 146
+										.col-sm-6
+											.spk5.pull-right
+											p Old Visitors
+											h5 146
+							.block-flat
+								.header
+									h3 Services
+								.content
+									table.no-border
+										thead.no-border
+											tr
+												th(style='width:80%;') Option
+												th.text-right Active
+										tbody.no-border-y
+											tr
+												td
+													strong Cloud Services
+													br
+													|  This option make active the cloud services
+												td.text-right
+													input.switch(checked='', data-size='small', name='op1', type='checkbox')
+											tr
+												td
+													strong SMS Notifications
+													br
+													|  This option actives the notification system
+												td.text-right
+													input.switch(checked='', data-size='small', name='op1', type='checkbox')
+											tr
+												td
+													strong Backup
+													br
+													|  This option actives automatic daily backups
+												td.text-right
+													input.switch(checked='', data-size='small', name='op1', type='checkbox')
+							.block-flat
+								.header
+									h3 Visitors
+								#world-map.content(style='height: 300px;')

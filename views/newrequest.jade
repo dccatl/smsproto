@@ -1,0 +1,139 @@
+extends layout
+
+block maincontent
+	#pcont.container-fluid
+		script.
+			//var dd = new Date.now();
+			//var dd = 'Test Text';
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+
+			if(dd<10) {
+			    dd='0'+dd
+			} 
+
+			if(mm<10) {
+			    mm='0'+mm
+			} 
+
+			today = mm+'/'+dd+'/'+yyyy;
+		.block-flat
+			.header
+				h3 New Scaffold Request
+				button.btn.btn-success.btn-rad(type='button') Submit
+				button.btn.btn-warning.btn-rad(type='button') Save Draft
+				button.btn.btn-danger.btn-rad(type='button') Recall
+			.cl-mcont
+				.row
+					label.col-sm-1.control-label Date Requested
+					.col-sm-1
+						input#reqDate.form-control(type='text', readonly='readonly')
+						script.
+							document.getElementById('reqDate').value=today;
+					label.col-sm-1.control-label Contractor
+					.col-sm-2
+						input.form-control(type='text', readonly='readonly', value='AT-PAC Global Services')
+					label.col-sm-1.control-label Request Number
+					.col-sm-2
+						input.form-control(type='text', readonly='readonly', placeholder='Number provided after submission...')
+					label.col-sm-1.control-label Revision
+					.col-sm-1
+						input.form-control(type='text', readonly='readonly', value='0')
+				.row
+					label.col-sm-1.control-label Contact
+					.col-sm-2
+						select#sel1.form-control
+							option David Churchill
+							option Nisar Khan
+							option Troy Kowalski
+							option Jeff Davis
+					label.col-sm-1.control-label Work Area
+					.col-sm-2
+						select#sel2.form-control
+							option ISBL
+							option OSBL
+				.row
+					label.col-sm-1.control-label Request Type
+					.col-sm-2
+						select#sel3.select2
+							optgroup(label='Request Type')
+								option Erection
+								option Modification
+								option Hard Baricade
+							optgroup(label='Dismantle')
+								option Full
+								option Partial
+					label.col-sm-1.control-label Priority Rating
+					.col-sm-2
+						select#sel4.form-control
+							option Standard
+							option Medium
+							option High (Requires Explanation)
+				.row
+					label.col-sm-1.control-label Date Required
+					.col-sm-2
+						.input-group.date.datetime(data-min-view='2', data-date-format='mm/dd/yyyy')
+								input#fromDate.form-control(size='1', type='text', value='', readonly='')
+								span.input-group-addon.btn.btn-primary
+									span.glyphicon.glyphicon-th
+					label.col-sm-1.control-label Required Until
+					.col-sm-2
+						.input-group.date.datetime(data-min-view='2', data-date-format='mm/dd/yyyy')
+							input#toDate.form-control(size='1', type='text', value='', readonly='', onchange='calcDays()')
+							span.input-group-addon.btn.btn-primary
+								span.glyphicon.glyphicon-th
+					label.col-sm-1.control-label Total Days
+					.col-md-1
+						input#totDays.form-control(type='text', readonly='readonly')
+				.row
+					label.col-sm-2.control-label(for='trades') Trade(s)
+					.col-sm-10
+						select.select2(multiple='' placeholder='Click to select trade(s)...')
+							option(value='Painter') Painter
+							option(value='Electrical') Electrical
+							option(value='Mechanical') Mechanical
+							option(value='Insulation') Insulation
+							option(value='HVAC') HVAC
+				.row
+					label.col-sm-2.control-label(for='Work Location') Specific Work Location
+					.col-sm-10
+						textarea.form-control
+				.row
+					label.col-sm-2.control-label(for='Work Description') Detailed Work Description
+					.col-sm-10
+						textarea.form-control
+				.row
+					label.col-sm-2.control-label(for='comments') Comments or Special Instructions
+					.col-sm-10
+						textarea#comments.form-control
+				.row
+					label.col-sm-1.control-label Approved By
+					.col-sm-2
+						input#appBy.form-control(type='text', readonly='readonly', placeholder='Not yet approved.')
+					label.col-sm-1.control-label Approval Date
+					.col-sm-2
+						input#appdDate.form-control(type='text', readonly='readonly', placeholder='Not yet approved.')
+
+				script.
+					function calcDays() {
+						var dateFrom = document.getElementById('fromDate').value;
+						var dateTo = document.getElementById('toDate').value;
+						dateFrom = new Date(dateFrom.substring(dateFrom.length - 4) + '-' + dateFrom.substring(0, 2) + '-' + dateFrom.substring(3, 5));
+						dateTo = new Date(dateTo.substring(dateTo.length - 4) + '-' + dateTo.substring(0, 2) + '-' + dateTo.substring(3, 5));
+						
+						Date.dateDiff = function(datepart, date1, date2) {
+							datepart = datepart.toLowerCase();
+							var diff = date2 - date1;
+							var divideBy = { 
+								w:604800000,
+								d:86400000,
+								h:3600000,
+								n:60000,
+								s:1000 };
+							return Math.floor( diff/divideBy[datepart]);
+						}
+						document.getElementById('totDays').value = Date.dateDiff('d', dateFrom, dateTo);
+					}						
+
